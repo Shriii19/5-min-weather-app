@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe Weather Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="weather-container" id="weatherContainer">
+        <!-- Background Animation -->
+        <div class="bg-animation">
+            <div class="cloud cloud1"></div>
+            <div class="cloud cloud2"></div>
+            <div class="cloud cloud3"></div>
+        </div>
+
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="app-title">
+                    <i class="fas fa-cloud-sun"></i>
+                    Vibe Weather
+                </h1>
+                <div class="search-container">
+                    <div class="search-box">
+                        <input type="text" id="cityInput" placeholder="Search for a city..." autocomplete="off">
+                        <button id="searchBtn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    <button id="locationBtn" class="location-btn" title="Use my location">
+                        <i class="fas fa-location-arrow"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Weather Display -->
+        <main class="main-content" id="mainContent">
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Loading weather data...</p>
+            </div>
+
+            <div class="weather-display" id="weatherDisplay" style="display: none;">
+                <!-- Current Weather Card -->
+                <div class="current-weather-card">
+                    <div class="current-weather-header">
+                        <div class="location-info">
+                            <h2 id="cityName">New York</h2>
+                            <p id="currentDate"></p>
+                        </div>
+                        <div class="weather-icon">
+                            <img id="weatherIcon" src="" alt="Weather Icon">
+                        </div>
+                    </div>
+                    
+                    <div class="current-weather-body">
+                        <div class="temperature-display">
+                            <span id="temperature">22°</span>
+                            <div class="temp-unit">
+                                <button class="unit-btn active" data-unit="C">°C</button>
+                                <button class="unit-btn" data-unit="F">°F</button>
+                            </div>
+                        </div>
+                        <div class="weather-description">
+                            <p id="description">Partly Cloudy</p>
+                            <p id="feelsLike">Feels like 25°</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Weather Stats -->
+                <div class="weather-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-label">Visibility</span>
+                            <span class="stat-value" id="visibility">10 km</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-label">Humidity</span>
+                            <span class="stat-value" id="humidity">65%</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-wind"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-label">Wind Speed</span>
+                            <span class="stat-value" id="windSpeed">12 km/h</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-thermometer-half"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-label">Pressure</span>
+                            <span class="stat-value" id="pressure">1013 hPa</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5-Day Forecast -->
+                <div class="forecast-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-calendar-week"></i>
+                        5-Day Forecast
+                    </h3>
+                    <div class="forecast-container" id="forecastContainer">
+                        <!-- Forecast cards will be dynamically generated -->
+                    </div>
+                </div>
+
+                <!-- Hourly Forecast -->
+                <div class="hourly-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-clock"></i>
+                        24-Hour Forecast
+                    </h3>
+                    <div class="hourly-container" id="hourlyContainer">
+                        <!-- Hourly cards will be dynamically generated -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Error State -->
+            <div class="error-state" id="errorState" style="display: none;">
+                <div class="error-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <h3>Oops! Something went wrong</h3>
+                <p id="errorMessage">Unable to fetch weather data. Please try again.</p>
+                <button class="retry-btn" id="retryBtn">
+                    <i class="fas fa-redo"></i>
+                    Try Again
+                </button>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Weather data provided by <a href="https://www.weatherapi.com/" target="_blank">WeatherAPI.com</a></p>
+            <p>Made with <i class="fas fa-heart"></i> by Vibe Coded</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
