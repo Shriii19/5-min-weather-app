@@ -6,7 +6,7 @@
 // CONFIGURATION & CONSTANTS
 // ================================
 
-const API_KEY = 'your-weatherapi-key-here'; // Replace with your WeatherAPI.com API key
+const API_KEY = 'cfba6f4ffa5343c3a06165601252607'; // WeatherAPI.com API key
 const BASE_URL = 'https://api.weatherapi.com/v1';
 const DEFAULT_CITY = 'New York';
 const REFRESH_INTERVAL = 10 * 60 * 1000; // 10 minutes
@@ -600,45 +600,4 @@ if (typeof module !== 'undefined' && module.exports) {
         getDayName,
         debounce
     };
-}
-
-    chart = new Chart(weatherChart, {
-        type: 'line',
-        data: {
-            labels: dates,
-            datasets: [{
-                label: 'Average Temperature (°C)',
-                data: temps,
-                backgroundColor: 'rgba(0, 123, 255, 0.5)',
-                borderColor: 'rgba(0, 123, 255, 1)',
-                borderWidth: 2,
-                fill: true,
-                tension: 0.4
-            }]
-        },
-        options: {
-            plugins: {
-                datalabels: {
-                    backgroundColor: 'rgba(0, 123, 255, 0.7)',
-                    color: 'white',
-                    borderRadius: 4,
-                    padding: 4,
-                    anchor: 'end',
-                    align: 'top',
-                    font: {
-                        weight: 'bold'
-                    },
-                    formatter: (value, context) => {
-                        return `${value.toFixed(1)}°C`;
-                    }
-                }
-            },
-            scales: {
-                y: {
-                    min: minTemp - padding,
-                    max: maxTemp + padding
-                }
-            }
-        }
-    });
 }
