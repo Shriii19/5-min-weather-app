@@ -3,67 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vibe Weather Dashboard</title>
+    <meta name="description" content="Modern weather dashboard with real-time forecasts, 5-day outlook, and beautiful glassmorphism design">
+    <meta name="keywords" content="weather, forecast, dashboard, temperature, humidity, wind speed">
+    <meta name="author" content="Vibe Coded">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Vibe Weather Dashboard">
+    <meta property="og:description" content="Beautiful weather dashboard with real-time data and forecasts">
+    <meta property="og:url" content="https://your-domain.com">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Vibe Weather Dashboard">
+    <meta property="twitter:description" content="Beautiful weather dashboard with real-time data and forecasts">
+    
+    <title>Vibe Weather Dashboard - Real-time Weather Forecasts</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Preload critical resources -->
+    <link rel="preconnect" href="https://api.weatherapi.com">
+    <link rel="preconnect" href="https://cdn.weatherapi.com">
 </head>
 <body>
     <div class="weather-container" id="weatherContainer">
+        <!-- Skip to main content for accessibility -->
+        <a href="#mainContent" class="skip-link">Skip to main content</a>
+        
         <!-- Background Animation -->
-        <div class="bg-animation">
+        <div class="bg-animation" aria-hidden="true">
             <div class="cloud cloud1"></div>
             <div class="cloud cloud2"></div>
             <div class="cloud cloud3"></div>
         </div>
 
         <!-- Header -->
-        <header class="header">
+        <header class="header" role="banner">
             <div class="header-content">
                 <h1 class="app-title">
-                    <i class="fas fa-cloud-sun"></i>
+                    <i class="fas fa-cloud-sun" aria-hidden="true"></i>
                     Vibe Weather
                 </h1>
                 <div class="search-container">
                     <div class="search-box">
-                        <input type="text" id="cityInput" placeholder="Search for a city..." autocomplete="off">
-                        <button id="searchBtn">
-                            <i class="fas fa-search"></i>
+                        <label for="cityInput" class="sr-only">Search for a city</label>
+                        <input 
+                            type="text" 
+                            id="cityInput" 
+                            placeholder="Search for a city..." 
+                            autocomplete="off"
+                            aria-label="Enter city name to search for weather"
+                            spellcheck="false"
+                        >
+                        <button id="searchBtn" type="button" aria-label="Search for weather">
+                            <i class="fas fa-search" aria-hidden="true"></i>
                         </button>
                     </div>
-                    <button id="locationBtn" class="location-btn" title="Use my location">
-                        <i class="fas fa-location-arrow"></i>
+                    <button 
+                        id="locationBtn" 
+                        class="location-btn" 
+                        type="button"
+                        title="Use my current location"
+                        aria-label="Get weather for my current location"
+                    >
+                        <i class="fas fa-location-arrow" aria-hidden="true"></i>
                     </button>
                 </div>
             </div>
         </header>
 
         <!-- Main Weather Display -->
-        <main class="main-content" id="mainContent">
-            <div class="loading" id="loading">
-                <div class="spinner"></div>
+        <main class="main-content" id="mainContent" role="main">
+            <!-- Loading State -->
+            <div class="loading" id="loading" role="status" aria-live="polite">
+                <div class="spinner" aria-hidden="true"></div>
                 <p>Loading weather data...</p>
             </div>
 
+            <!-- Weather Display -->
             <div class="weather-display" id="weatherDisplay" style="display: none;">
                 <!-- Current Weather Card -->
-                <div class="current-weather-card">
+                <section class="current-weather-card" aria-labelledby="current-weather-title">
+                    <h2 id="current-weather-title" class="sr-only">Current Weather</h2>
                     <div class="current-weather-header">
                         <div class="location-info">
-                            <h2 id="cityName">New York</h2>
+                            <h3 id="cityName">New York</h3>
                             <p id="currentDate"></p>
                         </div>
                         <div class="weather-icon">
-                            <img id="weatherIcon" src="" alt="Weather Icon">
+                            <img id="weatherIcon" src="" alt="" role="img">
                         </div>
                     </div>
                     
                     <div class="current-weather-body">
                         <div class="temperature-display">
-                            <span id="temperature">22°</span>
-                            <div class="temp-unit">
-                                <button class="unit-btn active" data-unit="C">°C</button>
-                                <button class="unit-btn" data-unit="F">°F</button>
+                            <span id="temperature" aria-label="Current temperature">22°</span>
+                            <div class="temp-unit" role="group" aria-label="Temperature unit selection">
+                                <button class="unit-btn active" data-unit="C" aria-pressed="true">°C</button>
+                                <button class="unit-btn" data-unit="F" aria-pressed="false">°F</button>
                             </div>
                         </div>
                         <div class="weather-description">
@@ -71,12 +110,13 @@
                             <p id="feelsLike">Feels like 25°</p>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <!-- Weather Stats -->
-                <div class="weather-stats">
+                <!-- Weather Statistics -->
+                <section class="weather-stats" aria-labelledby="weather-stats-title">
+                    <h2 id="weather-stats-title" class="sr-only">Weather Statistics</h2>
                     <div class="stat-card">
-                        <div class="stat-icon">
+                        <div class="stat-icon" aria-hidden="true">
                             <i class="fas fa-eye"></i>
                         </div>
                         <div class="stat-info">
@@ -85,7 +125,7 @@
                         </div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon">
+                        <div class="stat-icon" aria-hidden="true">
                             <i class="fas fa-tint"></i>
                         </div>
                         <div class="stat-info">
@@ -94,7 +134,7 @@
                         </div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon">
+                        <div class="stat-icon" aria-hidden="true">
                             <i class="fas fa-wind"></i>
                         </div>
                         <div class="stat-info">
@@ -103,7 +143,7 @@
                         </div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon">
+                        <div class="stat-icon" aria-hidden="true">
                             <i class="fas fa-thermometer-half"></i>
                         </div>
                         <div class="stat-info">
@@ -111,51 +151,78 @@
                             <span class="stat-value" id="pressure">1013 hPa</span>
                         </div>
                     </div>
-                </div>
+                </section>
 
                 <!-- 5-Day Forecast -->
-                <div class="forecast-section">
-                    <h3 class="section-title">
-                        <i class="fas fa-calendar-week"></i>
+                <section class="forecast-section" aria-labelledby="forecast-title">
+                    <h3 class="section-title" id="forecast-title">
+                        <i class="fas fa-calendar-week" aria-hidden="true"></i>
                         5-Day Forecast
                     </h3>
-                    <div class="forecast-container" id="forecastContainer">
+                    <div class="forecast-container" id="forecastContainer" role="list">
                         <!-- Forecast cards will be dynamically generated -->
                     </div>
-                </div>
+                </section>
 
                 <!-- Hourly Forecast -->
-                <div class="hourly-section">
-                    <h3 class="section-title">
-                        <i class="fas fa-clock"></i>
+                <section class="hourly-section" aria-labelledby="hourly-title">
+                    <h3 class="section-title" id="hourly-title">
+                        <i class="fas fa-clock" aria-hidden="true"></i>
                         24-Hour Forecast
                     </h3>
-                    <div class="hourly-container" id="hourlyContainer">
+                    <div class="hourly-container" id="hourlyContainer" role="list">
                         <!-- Hourly cards will be dynamically generated -->
                     </div>
-                </div>
+                </section>
             </div>
 
             <!-- Error State -->
-            <div class="error-state" id="errorState" style="display: none;">
-                <div class="error-icon">
+            <div class="error-state" id="errorState" style="display: none;" role="alert" aria-live="assertive">
+                <div class="error-icon" aria-hidden="true">
                     <i class="fas fa-exclamation-triangle"></i>
                 </div>
                 <h3>Oops! Something went wrong</h3>
                 <p id="errorMessage">Unable to fetch weather data. Please try again.</p>
-                <button class="retry-btn" id="retryBtn">
-                    <i class="fas fa-redo"></i>
+                <button class="retry-btn" id="retryBtn" type="button">
+                    <i class="fas fa-redo" aria-hidden="true"></i>
                     Try Again
                 </button>
             </div>
         </main>
 
         <!-- Footer -->
-        <footer class="footer">
-            <p>Weather data provided by <a href="https://www.weatherapi.com/" target="_blank">WeatherAPI.com</a></p>
+        <footer class="footer" role="contentinfo">
+            <p>
+                Weather data provided by 
+                <a href="https://www.weatherapi.com/" target="_blank" rel="noopener noreferrer">
+                    WeatherAPI.com
+                </a>
+            </p>
+            <p>
+                <small>&copy; 2025 Vibe Weather Dashboard. Made with ❤️ for beautiful weather experiences.</small>
+            </p>
         </footer>
     </div>
 
+    <!-- Load JavaScript -->
     <script src="script.js"></script>
+    
+    <!-- Add structured data for better SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Vibe Weather Dashboard",
+        "description": "Modern weather dashboard with real-time forecasts and beautiful design",
+        "url": "https://your-domain.com",
+        "applicationCategory": "Weather",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
 </body>
 </html>
